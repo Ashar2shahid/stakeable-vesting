@@ -1,0 +1,36 @@
+require('@nomicfoundation/hardhat-toolbox');
+require('solidity-coverage');
+require('hardhat-deploy');
+
+const fs = require('fs');
+let credentials = require('./credentials.example.json');
+if (fs.existsSync('./credentials.json')) {
+  credentials = require('./credentials.json');
+}
+
+module.exports = {
+  etherscan: credentials.etherscan,
+  networks: credentials.networks,
+  solidity: {
+    compilers: [
+      {
+        version: '0.8.4',
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
+      },
+      {
+        version: '0.8.17',
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
+      },
+    ],
+  },
+};
